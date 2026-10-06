@@ -1,0 +1,81 @@
+/* ========== 1) الألوان والمتغيرات — غيّر الثيم من هنا ========== */
+:root{
+  --bg:#050b14;            /* خلفية الصفحة */
+  --card:rgba(10,22,40,.72);/* خلفية الكارت */
+  --line:rgba(0,229,255,.22);/* لون الحدود */
+  --cyan:#00e5ff;          /* اللون الأساسي (نيون) */
+  --green:#38ffb0;         /* لون ثانوي */
+  --text:#d7e6f5;
+  --muted:#7f98b3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:18px;min-height:100vh;overflow-x:hidden}
+#bg{position:fixed;inset:0;z-index:-2}
+
+/* خط ضوئي بيعدي على الصفحة (Scanner) */
+.scan{position:fixed;left:0;right:0;height:120px;z-index:-1;pointer-events:none;
+  background:linear-gradient(transparent,rgba(0,229,255,.07),transparent);animation:scan 7s linear infinite}
+@keyframes scan{from{top:-120px}to{top:100%}}
+
+/* ========== 2) الهيدر ========== */
+.hero{text-align:center;padding:64px 20px 36px}
+#companyLogo{width:120px;height:120px;margin:0 auto 18px}
+.hero h1{font-family:'Orbitron',sans-serif;font-weight:800;font-size:clamp(2.4rem,7vw,4.6rem);letter-spacing:.35em;padding-left:.35em;
+  color:var(--cyan);text-shadow:0 0 18px rgba(0,229,255,.6),0 0 60px rgba(0,229,255,.25);animation:flicker 5s infinite}
+@keyframes flicker{0%,92%,100%{opacity:1}93%{opacity:.6}94%{opacity:1}96%{opacity:.75}}
+.tagline{color:var(--muted);margin-top:10px;min-height:1.6em;font-size:1.15rem}
+.tagline::after{content:"▌";color:var(--green);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:26px}
+.stat{border:1px solid var(--line);background:var(--card);padding:10px 22px;border-radius:6px}
+.stat b{display:block;font-family:'Orbitron',sans-serif;color:var(--green);font-size:1.7rem}
+.stat span{color:var(--muted);font-size:.95rem}
+
+/* ========== 3) شبكة المهندسين ========== */
+.team{max-width:1280px;margin:0 auto;padding:20px 20px 60px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 22px;
+  backdrop-filter:blur(8px);opacity:0;transform:translateY(30px);transition:.7s,border-color .3s,box-shadow .3s}
+.card.show{opacity:1;transform:none}
+.card:hover{border-color:var(--cyan);box-shadow:0 0 34px rgba(0,229,255,.18)}
+/* زوايا الكارت (شكل HUD) */
+.card::before,.card::after{content:"";position:absolute;width:22px;height:22px;border:2px solid var(--cyan)}
+.card::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-top-left-radius:14px}
+.card::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-bottom-right-radius:14px}
+
+/* ---- صورة الشخص ---- */
+.person{text-align:center}
+.photo-wrap{position:relative;width:150px;height:150px;margin:0 auto 14px}
+.photo-wrap::before{content:"";position:absolute;inset:-8px;border-radius:50%;
+  background:conic-gradient(var(--cyan),transparent 40%,var(--green),transparent 80%,var(--cyan));
+  animation:spin 6s linear infinite;-webkit-mask:radial-gradient(circle,transparent 66%,#000 67%);mask:radial-gradient(circle,transparent 66%,#000 67%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.photo-wrap .slot{border-radius:50%}
+.person h2{font-family:'Orbitron',sans-serif;font-size:1.15rem;letter-spacing:.06em}
+.role{color:var(--green);font-weight:600;margin:4px 0 2px}
+.count{color:var(--muted);font-size:.95rem}
+.divider{height:1px;margin:18px 0;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+
+/* ---- لوجوهات الشركات ---- */
+.partners{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.partner{text-align:center}
+.partner .slot{height:76px;border-radius:8px;background:#eef4fb;padding:10px}
+.partner .slot img{object-fit:contain}
+.partner .slot:hover{box-shadow:0 0 0 2px var(--cyan),0 0 18px rgba(0,229,255,.5)}
+.partner p{margin-top:6px;font-weight:600;font-size:.95rem}
+
+/* ========== 4) خانة رفع الصورة (Slot) ========== */
+.slot{position:relative;display:block;width:100%;height:100%;overflow:hidden;cursor:pointer;
+  background:rgba(0,229,255,.07);border:1px dashed var(--line)}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.slot .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.85rem;padding:4px}
+.slot:has(img){border-style:solid}
+.slot input{display:none}
+.photo-wrap .slot .ph{font-family:'Orbitron',sans-serif;font-size:2rem;color:var(--cyan)}
+.partner .slot .ph{color:#33516f}
+
+footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid var(--line)}
+
+/* احترام إعدادات تقليل الحركة */
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

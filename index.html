@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CENTRA | Cybersecurity Partnerships Portal</title>
+  <!-- الخطوط: Orbitron للعناوين + Rajdhani للنص -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- خلفية الجزيئات المتحركة (بتتحكم فيها script.js) -->
+  <canvas id="bg"></canvas>
+  <div class="scan"></div>
+
+  <!-- ===== الهيدر: لوجو الشركة + الاسم ===== -->
+  <header class="hero">
+    <!-- اضغط على المربع ده لتجربة رفع اللوجو، أو حط الصورة في images/centra-logo.png -->
+    <div id="companyLogo"></div>
+    <h1 id="companyName">CENTRA</h1>
+    <p class="tagline" id="tagline"></p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <!-- ===== كروت المهندسين (بتتعمل من DATA في script.js) ===== -->
+  <main id="team" class="team"></main>
+
+  <footer>© <span id="year"></span> CENTRA — Cybersecurity Team</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
